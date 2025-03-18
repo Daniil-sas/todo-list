@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <h1>Список задач</h1>
+    </header>
+    <main>
+        <div class="add-new-task">
+            <h1>Новая задача</h1>
+            <div class="bottom-group">
+                <input placeholder="Название задачи..." type="text">
+                <button>十 Добавить</button>
+            </div>
+        </div>
+        <div class="display-tasks">
+            <div class="task-theme-themplate task-theme-backlog">
+                <h3>Бэклог</h3>
+                <ul>
+                    <li>Выучить JS</li>
+                    <li>Выучить React</li>
+                    <li>Сделать домашку</li>
+                </ul>
+            </div>
+            <div class="task-theme-themplate task-theme-inprocess">
+                <h3>В процессе</h3>
+                <ul>
+                    <li>Выпить смузи</li>
+                    <li>Попить воды</li>
+                </ul>
+            </div>
+            <div class="task-theme-themplate task-theme-complete">
+                <h3>Готово</h3>
+                <ul>
+                    <li>Позвонить маме</li>
+                    <li>Погладить кота</li>
+                </ul>
+            </div>
+            <div class="task-theme-themplate task-theme-garbage">
+                <h3>Корзина</h3>
+                <ul>
+                    <li>Сходить погулять</li>
+                    <li>Прочитать Войну и Мир</li>
+                </ul>
+                <button class="clear-button" type="button">✕ Очистить</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,169 @@
+/* Общий стиль */
+:root {
+    --default-corner-radius: 10px;
+    --default-font-size: 15px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #eef4fb;
+}
+
+main {
+    padding: 23px 28px;
+}
+
+/*Стиль для header*/
+
+.header {
+    background-color: #2f80ed;
+}
+
+.header h1 {
+    color: white;
+    padding: 25px 35px;
+}
+
+/* Стиль для добавления задачи */
+
+.add-new-task {
+    border-radius: var(--default-corner-radius);
+    background: white;
+    padding: 20px;
+    width: fit-content;
+}
+
+.add-new-task h1 {
+    background-color: white;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.add-new-task .bottom-group {
+    background-color: white;
+    display: flex;
+    gap: 20px;
+}
+
+.add-new-task input[type=text] {
+    border-radius: var(--default-corner-radius);
+    outline: none;
+    padding: 10px;
+    font-size: var(--default-font-size);
+    color: #e4e1e1;
+    background-color: white;
+    border: 1px solid #e4e1e1;
+}
+
+.add-new-task input[type=text]::placeholder {
+    font-size: var(--default-font-size);
+    color: #e4e1e1;
+}
+
+.add-new-task button {
+    background-color: #2f80ed;
+    color: white;
+    border-radius: var(--default-corner-radius);
+    padding: 13px 40px;
+    font-size: var(--default-font-size);
+    font-weight: bold;
+    cursor: pointer;
+    border: 0;
+}
+
+.add-new-task button:hover {
+    background-color: #0056b3;
+}
+ 
+/* Для задачи */
+
+.display-tasks {
+    margin-top: 35px;
+    display: flex;
+    column-gap: 50px;
+}
+
+.display-tasks h3 {
+    padding: 10px 15px;
+    border-radius: var(--default-corner-radius);
+    margin-bottom: 20px;
+    font-weight: 500;
+    width: fit-content;
+}
+ 
+.display-tasks li {
+    list-style-type: none;
+    font-weight: 600;
+    font-size: var(--default-font-size);
+    padding: 20px;
+    background-color: white;
+    border-radius: var(--default-corner-radius);
+    margin: 10px 0;
+}
+
+.task-theme-themplate {
+    flex: 1 1 auto;
+}
+
+.task-theme-backlog h3 {
+    background-color: #e3e3e3;
+    color: #8e9092;
+}
+
+.task-theme-backlog li {
+    border-left: 5px solid #e3e3e3;
+}
+
+.task-theme-inprocess h3 {
+    background-color: #d6e7ff;
+    color: #5c9bf2;
+}
+
+.task-theme-inprocess li {
+    border-left: 5px solid #d6e7ff;
+}
+
+.task-theme-complete h3 {
+    background-color: #d7f9e0;
+    color: #8acea0;
+}
+
+.task-theme-complete li {
+    border-left: 5px solid #d7f9e0;
+}
+
+.task-theme-garbage h3 {
+    background-color: #fbe3e3;
+    color: #da8e8b;
+}
+
+.task-theme-garbage li {
+    border-left: 5px solid #fbe3e3;
+}
+
+
+/* Для области с задачами */
+
+
+/* Для кнопки очистить */
+
+.clear-button {
+    background-color: #c9666c;
+    color: white;
+    padding: 15px 0;
+    border: 0px;
+    border-radius: var(--default-corner-radius);
+    width: 100%;
+    font-weight: bold;
+    font-size: var(--default-font-size);
+}
+
+.clear-button:hover {
+    background-color: #b3464d;
+}
