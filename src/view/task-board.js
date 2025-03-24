@@ -1,4 +1,4 @@
-import { createElement } from "../framework/render.js"
+import BaseComponent from "../framework/base-component.js"
 
 function createDeskTemplate() {
     return (
@@ -7,20 +7,8 @@ function createDeskTemplate() {
     );
 }
 
-export default class DeskComponent {
+export default class DeskComponent extends BaseComponent {
     getTemplate() {
         return createDeskTemplate();
-    }
-
-    getElement() {
-        if (!this.element) {
-            this.element = createElement(this.getTemplate());
-        }
-
-        return this.element;
-    }
-
-    removeElement() {
-        this.element = null;
     }
 }

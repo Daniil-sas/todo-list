@@ -1,4 +1,4 @@
-import { createElement } from '../framework/render.js'
+import BaseComponent from '../framework/base-component.js';
 
 function createHeaderComponentTemplate() {
     return (
@@ -8,20 +8,8 @@ function createHeaderComponentTemplate() {
     );
 }
 
-export default class HeaderComponent {
+export default class HeaderComponent extends BaseComponent {
     getTemplate() {
         return createHeaderComponentTemplate();
-    }
-
-    getElement() {
-        if (!this.element) {
-            this.element = createElement(this.getTemplate());
-        }
-
-        return this.element;
-    }
-
-    removeElement() {
-        this.element = null;
     }
 }

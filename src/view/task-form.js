@@ -1,4 +1,4 @@
-import { createElement } from '../framework/render.js'
+import BaseComponent from '../framework/base-component.js';
 
 function createAddNewTaskTemplate() {
     return (
@@ -19,20 +19,8 @@ function createAddNewTaskTemplate() {
     );
 }
 
-export default class AddNewTaskComponent {
+export default class AddNewTaskComponent extends BaseComponent {
     getTemplate() {
         return createAddNewTaskTemplate();
-    }
-    
-    getElement() {
-        if (!this.element) {
-            this.element = createElement(this.getTemplate());
-        }
-
-        return this.element;
-    }
-    
-    removeElement() {
-        this.element = null;
     }
 }
