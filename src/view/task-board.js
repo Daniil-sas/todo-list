@@ -1,14 +1,15 @@
 import { createElement } from "../framework/render.js"
 
-function createTaskTemplate() {
+function createDeskTemplate() {
     return (
-        `<li>Название первой задачи</li>`
+        `<section class="desk-tasks">
+        </section>`
     );
 }
 
-export default class TaskComponent {
+export default class DeskComponent {
     getTemplate() {
-        return createTaskTemplate();
+        return createDeskTemplate();
     }
 
     getElement() {

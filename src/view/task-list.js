@@ -1,14 +1,18 @@
 import { createElement } from "../framework/render.js"
 
-function createTaskTemplate() {
+function createTasksListTemplate() {
     return (
-        `<li>Название первой задачи</li>`
+        `<div class="display-tasks">
+          <h3>Название блока</h3>
+          <ul class="task-container">
+          </ul>
+        </div>`
     );
 }
 
-export default class TaskComponent {
+export default class TasksListComponent {
     getTemplate() {
-        return createTaskTemplate();
+        return createTasksListTemplate();
     }
 
     getElement() {

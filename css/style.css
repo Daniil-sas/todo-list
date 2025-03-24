@@ -1,4 +1,3 @@
-/* Общий стиль */
 :root {
     --default-corner-radius: 10px;
     --default-font-size: 15px;
@@ -8,7 +7,7 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -19,18 +18,14 @@ main {
     padding: 23px 28px;
 }
 
-/*Стиль для header*/
-
-.header {
+header {
     background-color: #2f80ed;
 }
 
-.header h1 {
+header h1 {
     color: white;
     padding: 25px 35px;
 }
-
-/* Стиль для добавления задачи */
 
 .add-new-task {
     border-radius: var(--default-corner-radius);
@@ -40,13 +35,11 @@ main {
 }
 
 .add-new-task h1 {
-    background-color: white;
     font-size: 25px;
     margin-bottom: 10px;
 }
 
 .add-new-task .bottom-group {
-    background-color: white;
     display: flex;
     gap: 20px;
 }
@@ -81,17 +74,21 @@ main {
     background-color: #0056b3;
 }
  
-/* Для задачи */
-
-.display-tasks {
+.desk-tasks {
     margin-top: 35px;
     display: flex;
     column-gap: 50px;
 }
 
+.display-tasks {
+    flex: 1 1 auto;
+}
+
 .display-tasks h3 {
     padding: 10px 15px;
     border-radius: var(--default-corner-radius);
+    background-color: #e3e3e3;
+    color: #68727b;
     margin-bottom: 20px;
     font-weight: 500;
     width: fit-content;
@@ -99,18 +96,33 @@ main {
  
 .display-tasks li {
     list-style-type: none;
-    font-weight: 600;
+    font-weight: 500;
     font-size: var(--default-font-size);
     padding: 20px;
+    color: #000;
     background-color: white;
+    border-left: 6px solid #e3e3e3;
     border-radius: var(--default-corner-radius);
     margin: 10px 0;
 }
 
-.task-theme-themplate {
-    flex: 1 1 auto;
+.clear-button {
+    background-color: #c9666c;
+    color: white;
+    padding: 15px 0;
+    border: 0px;
+    border-radius: var(--default-corner-radius);
+    width: 100%;
+    font-weight: bold;
+    font-size: var(--default-font-size);
 }
 
+.clear-button:hover {
+    background-color: #b3464d;
+}
+
+
+/*
 .task-theme-backlog h3 {
     background-color: #e3e3e3;
     color: #8e9092;
@@ -146,24 +158,4 @@ main {
 .task-theme-garbage li {
     border-left: 5px solid #fbe3e3;
 }
-
-
-/* Для области с задачами */
-
-
-/* Для кнопки очистить */
-
-.clear-button {
-    background-color: #c9666c;
-    color: white;
-    padding: 15px 0;
-    border: 0px;
-    border-radius: var(--default-corner-radius);
-    width: 100%;
-    font-weight: bold;
-    font-size: var(--default-font-size);
-}
-
-.clear-button:hover {
-    background-color: #b3464d;
-}
+*/
