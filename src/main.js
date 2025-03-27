@@ -22,7 +22,7 @@ for (let i = 0; i < 4; i++) {
     
     const taskContainer = list.getElement().querySelector(".task-container");
 
-    for (let j = 0; j < 4; j++) {
+    for (let j = 0; j < 3; j++) {
         render(new TaskComponent(), taskContainer);
     }
 }
