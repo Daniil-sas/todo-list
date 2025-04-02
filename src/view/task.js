@@ -1,13 +1,18 @@
 import BaseComponent from "../framework/base-component.js";
 
-function createTaskTemplate() {
+function createTaskTemplate(task) {
     return (
-        `<li>Название первой задачи</li>`
+        `<li>${task}</li>`
     );
 }
 
 export default class TaskComponent extends BaseComponent {
+    constructor(tasks) {
+        super();
+        this.tasks = tasks;
+    }
+
     getTemplate() {
-        return createTaskTemplate();
+        return createTaskTemplate(this.tasks);
     }
 }

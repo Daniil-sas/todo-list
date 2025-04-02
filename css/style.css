@@ -121,41 +121,38 @@ header h1 {
     background-color: #b3464d;
 }
 
-
-/*
-.task-theme-backlog h3 {
+.backlog h3 {
     background-color: #e3e3e3;
     color: #8e9092;
 }
 
-.task-theme-backlog li {
+.backlog li {
     border-left: 5px solid #e3e3e3;
 }
 
-.task-theme-inprocess h3 {
+.processing h3 {
     background-color: #d6e7ff;
     color: #5c9bf2;
 }
 
-.task-theme-inprocess li {
+.processing li {
     border-left: 5px solid #d6e7ff;
 }
 
-.task-theme-complete h3 {
+.done h3 {
     background-color: #d7f9e0;
     color: #8acea0;
 }
 
-.task-theme-complete li {
+.done li {
     border-left: 5px solid #d7f9e0;
 }
 
-.task-theme-garbage h3 {
+.basket h3 {
     background-color: #fbe3e3;
     color: #da8e8b;
 }
 
-.task-theme-garbage li {
+.basket li {
     border-left: 5px solid #fbe3e3;
 }
-*/
