@@ -3,7 +3,7 @@ import { Status } from "../const.js";
 export const tasks = [
     {
         status: Status.BACKLOG,
-        tasks: ["Сходить в магаз", "Пойти погулять", "Устроиться на работу"]
+        tasks: []
     },
     {
         status: Status.PROCESSING,

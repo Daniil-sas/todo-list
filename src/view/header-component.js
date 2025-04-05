@@ -1,4 +1,4 @@
-import BaseComponent from '../framework/base-component.js';
+import AbstractComponent from '../framework/view/abstract-component.js';
 
 function createHeaderComponentTemplate() {
     return (
@@ -8,8 +8,8 @@ function createHeaderComponentTemplate() {
     );
 }
 
-export default class HeaderComponent extends BaseComponent {
-    getTemplate() {
+export default class HeaderComponent extends AbstractComponent {
+    get template() {
         return createHeaderComponentTemplate();
     }
 }

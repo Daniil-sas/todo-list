@@ -1,4 +1,4 @@
-import BaseComponent from '../framework/base-component.js';
+import AbstractComponent from '../framework/view/abstract-component.js';
 
 function createAddNewTaskTemplate() {
     return (
@@ -19,8 +19,8 @@ function createAddNewTaskTemplate() {
     );
 }
 
-export default class AddNewTaskComponent extends BaseComponent {
-    getTemplate() {
+export default class AddNewTaskComponent extends AbstractComponent {
+    get template() {
         return createAddNewTaskTemplate();
     }
 }

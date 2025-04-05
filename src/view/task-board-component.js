@@ -1,4 +1,4 @@
-import BaseComponent from "../framework/base-component.js"
+import AbstractComponent from "../framework/view/abstract-component.js"
 
 function createDeskTemplate() {
     return (
@@ -7,8 +7,8 @@ function createDeskTemplate() {
     );
 }
 
-export default class DeskComponent extends BaseComponent {
-    getTemplate() {
+export default class DeskComponent extends AbstractComponent {
+    get template() {
         return createDeskTemplate();
     }
 }

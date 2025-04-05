@@ -1,4 +1,4 @@
-import BaseComponent from "../framework/base-component.js";
+import AbstractComponent from "../framework/view/abstract-component.js";
 
 function createTaskTemplate(task) {
     return (
@@ -6,13 +6,13 @@ function createTaskTemplate(task) {
     );
 }
 
-export default class TaskComponent extends BaseComponent {
+export default class TaskComponent extends AbstractComponent {
     constructor(tasks) {
         super();
         this.tasks = tasks;
     }
 
-    getTemplate() {
+    get template() {
         return createTaskTemplate(this.tasks);
     }
 }
