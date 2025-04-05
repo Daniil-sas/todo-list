@@ -1,8 +1,9 @@
 import { render } from "../framework/render.js";
-import TaskComponent from "../view/task.js";
-import DeskComponent from "../view/task-board.js";
-import TasksListComponent from "../view/task-list.js";
-import ClearButtonComonent from "../view/clear-button.js";
+import TaskComponent from "../view/task-component.js";
+import DeskComponent from "../view/task-board-component.js";
+import TasksListComponent from "../view/task-list-component.js";
+import ClearButtonComonent from "../view/clear-button-component.js";
+import StubComponent from "../view/stub-component.js";
 
 export default class TasksBoardPresenter {
     #taskDeskComponent = new DeskComponent();
@@ -17,26 +18,42 @@ export default class TasksBoardPresenter {
     }
 
     init() {
-        this.#boardtasks = [...this.#tasksModel.getTasks()];
+        this.#boardtasks = [...this.#tasksModel.tasks];
 
         render(this.#taskDeskComponent, this.#boardContainer);
         
-        for (const taskList of this.#boardtasks) {
-            const status = taskList.status;
+        this.#boardtasks.forEach((taskList) => {
+            this.#renderTaskList(taskList.status, taskList.tasks);
+        });
 
-            const list = new TasksListComponent(status);
+        this.#renderClearButton();
+    }
 
-            render(list, this.#taskDeskComponent.getElement());
-        
-            for (const task of taskList.tasks) {
-                render(new TaskComponent(task), list.getElement().querySelector('.task-container'));
-            }
-        }
+    #renderTask(task, container) {
+        render(new TaskComponent(task), container.element.querySelector('.task-container'));
+    }
 
+    #renderTaskList(status, tasks) {
+        const list = new TasksListComponent(status);
+
+        render(list, this.#taskDeskComponent.element);
+
+        tasks.length === 0 ? this.#renderStubComponent(list) : tasks.forEach((task) => {
+            this.#renderTask(task, list);
+        });
+    }
+
+    #renderClearButton() {
         const basketContainer = document.querySelector('.basket');
 
-        if (basketContainer) {
+        const basketTasks = basketContainer?.querySelector('li');
+
+        if (basketContainer && basketTasks) {
             render(new ClearButtonComonent(), basketContainer);
         }
+    }
+
+    #renderStubComponent(container) {
+        render(new StubComponent(), container.element);
     }
 }
