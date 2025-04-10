@@ -77,11 +77,13 @@ header h1 {
 .desk-tasks {
     margin-top: 35px;
     display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
     column-gap: 50px;
 }
 
 .display-tasks {
-    flex: 1 1 auto;
+    width: 40%;
 }
 
 .display-tasks h3 {
@@ -104,6 +106,7 @@ header h1 {
     border-left: 6px solid #e3e3e3;
     border-radius: var(--default-corner-radius);
     margin: 10px 0;
+    word-break: break-all;
 }
 
 .stub {
@@ -122,6 +125,7 @@ header h1 {
     border-radius: var(--default-corner-radius);
     width: 100%;
     font-weight: bold;
+    cursor: pointer;
     font-size: var(--default-font-size);
 }
 
