@@ -14,6 +14,18 @@ export default class TasksModel {
         return this.#boardtasks.filter(f => f.status === status)[0];
     }
 
+    getTaskById(taskId) {
+        for (const listTask of this.#boardtasks) {
+            const taskById = listTask.tasks.filter(t => t.id === taskId)[0];
+
+            if (taskById) {
+                const currStatus = listTask.status;
+                
+                return [ currStatus, taskById ];
+            }
+        }
+    }
+
     addTask(title) {
         const newTask = {
             id: generateID(),
@@ -36,6 +48,16 @@ export default class TasksModel {
         this._notifyObservers();
     }
 
+    removeTaskFromStatus(task, status) {
+        const listTaskOfStatus = this.getTasksByStatus(status);
+
+        const indexTask = listTaskOfStatus.tasks.indexOf(task);
+
+        if (indexTask > -1) {
+            listTaskOfStatus.tasks.splice(indexTask, 1);
+        }
+    }
+
     removeBasketTask() {
         const basketTasks = this.getTasksByStatus(Status.BASKET);
 
@@ -46,6 +68,17 @@ export default class TasksModel {
 
     addObserver(observer) {
         this.#observers.push(observer);
+    }
+
+    updateTaskStatus(taskId, newStatus) {
+        const [oldStatus, task] = this.getTaskById(taskId);
+
+        if (task && oldStatus != newStatus) {
+            this.getTasksByStatus(newStatus).tasks.push(task);
+            this.removeTaskFromStatus(task, oldStatus);
+
+            this._notifyObservers();
+        }
     }
 
     removeObserver(observer) {

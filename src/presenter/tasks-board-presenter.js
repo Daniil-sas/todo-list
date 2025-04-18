@@ -53,17 +53,17 @@ export default class TasksBoardPresenter {
     }
 
     #renderTaskList(status, tasks) {
-        const list = new TasksListComponent(status);
+        const list = new TasksListComponent(status, this.#handleTaskDrop.bind(this));
 
         render(list, this.#taskDeskComponent.element);
 
         tasks.length === 0 ? this.#renderStubComponent(list) : tasks.forEach((task) => {
-            this.#renderTask(task.name, list);
+            this.#renderTask(task, list);
         });
     }
 
     #renderTask(task, container) {
-        render(new TaskComponent(task), container.element.querySelector('.task-container'));
+        render(new TaskComponent(task), container.element.querySelector('ul'));
     }
 
     #renderClearButton() {
@@ -87,5 +87,9 @@ export default class TasksBoardPresenter {
     #handleModelChange() {
         this.#clearBoard();
         this.#renderBoard();
+    }
+
+    #handleTaskDrop(taskId, newStatus) {
+        this.#tasksModel.updateTaskStatus(taskId, newStatus);
     }
 }
