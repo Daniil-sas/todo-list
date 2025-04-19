@@ -89,7 +89,7 @@ export default class TasksBoardPresenter {
         this.#renderBoard();
     }
 
-    #handleTaskDrop(taskId, newStatus) {
-        this.#tasksModel.updateTaskStatus(taskId, newStatus);
+    #handleTaskDrop(newStatus, taskId, droppedTask) {
+        this.#tasksModel.updateTaskStatus(newStatus, taskId, droppedTask);
     }
 }

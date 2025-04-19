@@ -1,4 +1,4 @@
-import { StatusLabel } from "../const.js";
+import { OrderPosition, StatusLabel } from "../const.js";
 import AbstractComponent from "../framework/view/abstract-component.js";
 
 function createTasksListTemplate(label, status) {
@@ -12,8 +12,6 @@ function createTasksListTemplate(label, status) {
 }
 
 export default class TasksListComponent extends AbstractComponent {
-    #droppedTaskId = null;
-
     constructor(status, onTaskDrop) {
         super();
         this.status = status;
@@ -31,17 +29,38 @@ export default class TasksListComponent extends AbstractComponent {
         container.addEventListener('dragover', (evt) => {
             evt.preventDefault();
         });
-
-        container.addEventListener('dragenter', (evt) => {
-            evt.preventDefault();
-            this.#droppedTaskId = evt.target.id;
-        });
-
+        
         container.addEventListener('drop', (evt) => {
             evt.preventDefault();
+            const droppedTarget = {
+                taskId: null,
+                order: OrderPosition.END
+            };
+
+            const dropTargetElement = evt;
+            const [x, y] = [dropTargetElement.clientX, dropTargetElement.clientY];
+            const localName = dropTargetElement.target.localName;
+            
+            if (localName === 'div' || localName === 'h3') {
+                droppedTarget.order = document.elementFromPoint(x, y - 15).localName === 'li' ? OrderPosition.END : OrderPosition.START;
+            } else if (localName === 'ul') {
+                const aboveElement = document.elementFromPoint(x, y - 15).id;
+                droppedTarget.taskId = aboveElement;
+                droppedTarget.order = OrderPosition.BELOW;
+            } else if (localName === 'li') {
+                droppedTarget.taskId = dropTargetElement.target.id;
+                const targetHeight = dropTargetElement.target.clientHeight;
+                const targetOffsetTop = dropTargetElement.target.offsetTop;
+
+                const dragPositionRelativeToTarget = y - targetOffsetTop;
+
+                droppedTarget.order = dragPositionRelativeToTarget > targetHeight / 2 
+                    ? OrderPosition.BELOW 
+                    : OrderPosition.ABOVE;
+            }
+
             const taskId = evt.dataTransfer.getData('text/plain');
-            console.log(taskId, this.#droppedTaskId);
-            onTaskDrop(taskId, this.status);
+            onTaskDrop(this.status, taskId, droppedTarget);
         });
     }
 }

@@ -1,4 +1,4 @@
-import { Status } from "../const.js";
+import { OrderPosition, Status } from "../const.js";
 import { tasks } from "../mock/taks.js";
 import { generateID } from "../utils.js";
 
@@ -14,7 +14,7 @@ export default class TasksModel {
         return this.#boardtasks.filter(f => f.status === status)[0];
     }
 
-    getTaskById(taskId) {
+    getTaskInfoById(taskId) {
         for (const listTask of this.#boardtasks) {
             const taskById = listTask.tasks.filter(t => t.id === taskId)[0];
 
@@ -70,13 +70,24 @@ export default class TasksModel {
         this.#observers.push(observer);
     }
 
-    updateTaskStatus(taskId, newStatus) {
-        const [oldStatus, task] = this.getTaskById(taskId);
+    updateTaskStatus(newStatus, taskId, droppedTask) {
+        const [oldStatus, task] = this.getTaskInfoById(taskId);
 
-        if (task && oldStatus != newStatus) {
-            this.getTasksByStatus(newStatus).tasks.push(task);
+        if (task && task.id !== droppedTask.taskId) {
+            const taskByStatus = this.getTasksByStatus(newStatus);
+            const order = droppedTask.order;
+
             this.removeTaskFromStatus(task, oldStatus);
 
+            if (order === OrderPosition.START || order === OrderPosition.END) {
+                const indexSet = order === OrderPosition.START ? 0 : taskByStatus.tasks.length;
+                taskByStatus.tasks.splice(indexSet, 0, task);
+            } else {
+                const indexDroppedTask = taskByStatus.tasks.indexOf(this.getTaskInfoById(droppedTask.taskId)[1]) + (order === OrderPosition.ABOVE ? 0 : 1);
+                taskByStatus.tasks.splice(indexDroppedTask, 0, task);
+            }
+
+            
             this._notifyObservers();
         }
     }
