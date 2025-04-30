@@ -14,7 +14,7 @@ export default class TaskComponent extends AbstractComponent {
     }
 
     get template() {
-        return createTaskTemplate(this.task.id, this.task.name);
+        return createTaskTemplate(this.task.id, this.task.title);
     }
 
     #afterCreateElement() {

@@ -3,8 +3,11 @@ import TaskComponent from "../view/task-component.js";
 import DeskComponent from "../view/task-board-component.js";
 import TasksListComponent from "../view/task-list-component.js";
 import StubComponent from "../view/stub-component.js";
+import LoadingViewComponent from "../view/loading-view-component.js";
+import { UserAction } from "../const.js";
 
 export default class TasksBoardPresenter {
+    #loadingComponent = new LoadingViewComponent();
     #taskDeskComponent = new DeskComponent();
     #clearButtonComponent = null;
     #boardContainer = null;
@@ -19,7 +22,10 @@ export default class TasksBoardPresenter {
         this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
     }
 
-    init() {
+    async init() {
+        render(this.#loadingComponent, this.#boardContainer);
+        await this.#tasksModel.init();
+        this.#clearBoard();
         this.#renderBoard();
     }
 
@@ -29,7 +35,7 @@ export default class TasksBoardPresenter {
         }
 
         render(this.#taskDeskComponent, this.#boardContainer);
-
+        
         this.#boardtasks.forEach((taskList) => {
             this.#renderTaskList(taskList.status, taskList.tasks);
         });
@@ -37,19 +43,27 @@ export default class TasksBoardPresenter {
         this.#renderClearButton();
     }
 
-    createTask() {
+    async createTask() {
         const taskTitle = document.querySelector('.add-new').value.trim();
         if (!taskTitle) {
             return;
         }
 
-        this.#tasksModel.addTask(taskTitle);
-
-        document.querySelector('.add-new').value = '';
+        try {
+            await this.#tasksModel.addTask(taskTitle);
+            document.querySelector('.add-new').value = '';
+        } catch(err) {
+            console.error('Ошибка при создании задачи: ', err);
+            throw err;
+        }
     }
 
-    clearBasket() {
-        this.#tasksModel.removeBasketTask();
+    async clearBasket() {
+        try {
+            await this.#tasksModel.removeBasketTask();
+        } catch(err) {
+            console.error('Ошибка при очистке корзины: ', err);
+        }
     }
 
     #renderTaskList(status, tasks) {
@@ -60,6 +74,8 @@ export default class TasksBoardPresenter {
         tasks.length === 0 ? this.#renderStubComponent(list) : tasks.forEach((task) => {
             this.#renderTask(task, list);
         });
+
+        this.#loadingComponent.element.style = 'display: none;';
     }
 
     #renderTask(task, container) {
@@ -84,12 +100,22 @@ export default class TasksBoardPresenter {
         this.#taskDeskComponent.element.innerHTML = '';
     }
 
-    #handleModelChange() {
-        this.#clearBoard();
-        this.#renderBoard();
+    #handleModelChange(event, payload) {
+        switch(event) {
+            case UserAction.ADD_TASK:
+            case UserAction.UPDATE_TASK:
+            case UserAction.DELETE_TASK:
+                this.#clearBoard();
+                this.#renderBoard();
+                break;
+        }
     }
 
-    #handleTaskDrop(newStatus, taskId, droppedTask) {
-        this.#tasksModel.updateTaskStatus(newStatus, taskId, droppedTask);
+    async #handleTaskDrop(newStatus, taskId, droppedTask) {
+        try {
+            await this.#tasksModel.updateTaskStatus(newStatus, taskId, droppedTask);
+        } catch(err) {
+            console.error('Ошибка при обновлении статуса задачи: ', err);
+        }
     }
 }
